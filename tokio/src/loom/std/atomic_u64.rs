@@ -8,12 +8,12 @@ pub(crate) use self::imp::AtomicU64;
 // Once `cfg_target_has_atomic` feature is stable, we can replace it with
 // `#[cfg(target_has_atomic = "64")]`.
 // Refs: https://github.com/rust-lang/rust/tree/master/src/librustc_target
-#[cfg(not(any(target_arch = "arm", target_arch = "mips", target_arch = "powerpc")))]
+#[cfg(not(any(target_arch = "arm", target_arch = "mips", target_arch = "powerpc", target_arch = "xtensa")))]
 mod imp {
     pub(crate) use std::sync::atomic::AtomicU64;
 }
 
-#[cfg(any(target_arch = "arm", target_arch = "mips", target_arch = "powerpc"))]
+#[cfg(any(target_arch = "arm", target_arch = "mips", target_arch = "powerpc", target_arch = "xtensa"))]
 mod imp {
     use std::sync::atomic::Ordering;
     use std::sync::Mutex;
